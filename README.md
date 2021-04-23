@@ -1,4 +1,4 @@
-# AWS Amplify React Native POC
+# aws-amplify-rn-test
 
 Cognito based authentication test in a RN App
 
@@ -26,3 +26,7 @@ AmplifyAuthController.signOut() // Logs out the current session
 AmplifyAuthController.initPhoneNumberVerify() // Sends SMS verification code
 AmplifyAuthController.completePhoneNumberVerify(confirmationCode) // Verifies user phone number 
 ```
+
+## Amplify Docs
+
+- [Amplify Auth Cognito](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js)
