@@ -1,11 +1,11 @@
 import {Amplify, Auth} from "aws-amplify";
 
 
-export function initAmplify(config) {
+function initAmplify(config) {
     Amplify.configure(config)
 }
 
-export async function signUp(username, password, phoneNumber, ssn) {
+async function signUp(username, password, phoneNumber, ssn) {
     try {
         const { user } = await Auth.signUp({
             username: username,
@@ -21,7 +21,7 @@ export async function signUp(username, password, phoneNumber, ssn) {
     }
 }
 
-export async function resendConfirmationCode(username) {
+async function resendConfirmationCode(username) {
     try {
         await Auth.resendSignUp(username);
         console.log('code resent successfully');
@@ -30,7 +30,7 @@ export async function resendConfirmationCode(username) {
     }
 }
 
-export async function confirmSignUp(username, confirmationCode) {
+async function confirmSignUp(username, confirmationCode) {
     try {
         await Auth.confirmSignUp(username, confirmationCode);
         console.log('user confirmed')
@@ -39,7 +39,7 @@ export async function confirmSignUp(username, confirmationCode) {
     }
 }
 
-export async function signIn(username, password) {
+async function signIn(username, password) {
     try {
         const user = await Auth.signIn(username, password);
         console.log('USER', user)
@@ -48,7 +48,7 @@ export async function signIn(username, password) {
     }
 }
 
-export async function signOut() {
+async function signOut() {
     try {
         await Auth.signOut();
         console.log('logout')
@@ -57,7 +57,7 @@ export async function signOut() {
     }
 }
 
-export function initPhoneNumberVerify() {
+function initPhoneNumberVerify() {
     Auth.verifyCurrentUserAttribute('phone_number')
         .then(() => {
             console.log('a verification code is sent');
@@ -66,11 +66,22 @@ export function initPhoneNumberVerify() {
     });
 }
 
-export function completePhoneNumberVerify(confirmationCode) {
+function completePhoneNumberVerify(confirmationCode) {
     Auth.verifyCurrentUserAttributeSubmit('phone_number', confirmationCode)
         .then(() => {
             console.log('phone_number verified');
         }).catch(e => {
         console.log('failed with error', e);
     });
+}
+
+export const AmplifyAuthController = {
+    initAmplify,
+    signUp,
+    resendConfirmationCode,
+    confirmSignUp,
+    signIn,
+    signOut,
+    initPhoneNumberVerify,
+    completePhoneNumberVerify
 }

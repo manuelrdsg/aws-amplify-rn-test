@@ -12,16 +12,7 @@ import {
 import { Colors, Header } from 'react-native/Libraries/NewAppScreen';
 import { styles } from './App.Styles'
 import {AmplifyConfig} from "../amplify-config";
-import {
-  initAmplify,
-  signUp,
-  resendConfirmationCode,
-  confirmSignUp,
-  signIn,
-  signOut,
-  initPhoneNumberVerify,
-  completePhoneNumberVerify
-} from "./AmplifyAuthController";
+import { AmplifyAuthController} from "./AmplifyAuthController";
 
 
 const userConfig = {
@@ -40,7 +31,7 @@ const App = () => {
   const {username, password, phoneNumber, ssn} = userConfig
 
   useEffect(() => {
-    initAmplify(AmplifyConfig)
+    AmplifyAuthController.initAmplify(AmplifyConfig)
   }, [])
 
   return (
@@ -66,37 +57,37 @@ const App = () => {
           />
 
           <TouchableOpacity style={styles.button}
-              onPress={() => signUp(username, password, phoneNumber, ssn)}
+              onPress={() => AmplifyAuthController.signUp(username, password, phoneNumber, ssn)}
           >
             <Text>SignUp</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
-               onPress={() => resendConfirmationCode(username)}
+               onPress={() => AmplifyAuthController.resendConfirmationCode(username)}
           >
             <Text>Resend Code</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
-              onPress={() => confirmSignUp(username, confirmationCode)}
+              onPress={() => AmplifyAuthController.confirmSignUp(username, confirmationCode)}
           >
             <Text>Confirm SignUp</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
-              onPress={() => signIn(username, password)}
+              onPress={() => AmplifyAuthController.signIn(username, password)}
           >
             <Text>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
-              onPress={() => signOut()}
+              onPress={() => AmplifyAuthController.signOut()}
           >
             <Text>Logout</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
-              onPress={() => initPhoneNumberVerify()}
+              onPress={() => AmplifyAuthController.initPhoneNumberVerify()}
           >
             <Text>Init Verify</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}
-              onPress={() => completePhoneNumberVerify(confirmationCode)}
+              onPress={() => AmplifyAuthController.completePhoneNumberVerify(confirmationCode)}
           >
             <Text>Complete Verify</Text>
           </TouchableOpacity>
